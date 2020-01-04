@@ -1,0 +1,133 @@
+1.简答题
+  写出常见的5种异常，要求英文名称和中文名称。
+
+2.简答题
+  写出异常捕获的语法格式以及执行流程。
+
+3.编程题
+  自定义年龄异常类即可。
+
+作业：
+-----------------------------------------------------------------------------------
+今天内容：
+   (1)I/O流
+   (2)线程
+
+1.I/O流
+1.1 基本概念
+  I/O就是Input/Output的简写形式，也就是输入/输出，换句话说就是指读写操作。
+  I/O流就是指像流水一样源源不断读写的操作。
+
+1.2 基本分类
+  按照读写单位/单元的不同分为：字节流 和 字符流。
+  其中字节流就是指以字节(byte)为单位进行读写的流，可以用于读写任何文件。
+  其中字符流就是指以字符(2个字节)为单位进行读写的流，只能用于读写文本文件。
+  
+  按照数据流动方向的不同分为：输入流 和 输出流(站在程序的角度来看)。
+  其中输入流就是指从文件中读取数据并输入到程序中，也就是读文件。
+  其中输出流就是指将程序中的数据输出到文件中，也就是写文件。
+
+1.3 IO流的层次结构
+  字节流的顶层类为：InputStream类 和 OutputStream类.
+     其中InputStream类主要子类：FileInputStream、DataInputStream、ObjectInputStream
+     其中OutputStream类主要子类：FileOutputStream、DataOutputStream(间接子类)、                                      ObjectOutputStream
+
+  字符流的顶层类为：Reader类  和 Writer类.
+     其中Reader类主要子类：BufferedReader、InputStreamReader、StringReader。
+     其中Writer类主要子类：BufferedWriter、OutputStreamWriter、StringWriter。
+
+补充：
+  java.io.PrintStream类是OutputStream类的间接子类。
+  
+1.4 FileOutputStream类(重点)
+(1)基本概念
+   java.io.FileOutputStream类用于将图像之类的原始字节流写入到输出流中。
+
+(2)常用的方法      
+   FileOutputStream(String name) - 根据参数指定的文件来创建输出流对象。
+   FileOutputStream(String name, boolean append) 
+      - 用于以追加的方式来创建输出流对象，可以保留文件中的原有内容。
+   void write(int b) - 用于将参数指定的单个字节写入到文件输出流中。
+   void write(byte[] b, int off, int len) 
+      - 用于将参数指定数组b中从off位置开始的len个字节写入文件输出流中。
+   void write(byte[] b) - 用于将参数指定的整个数组都写入文件输出流中。
+   void flush() - 用于刷新输出缓冲区。
+   void close() - 用于关闭文件输出流并释放相关的资源。
+
+1.5 FileInputStream类(重点)
+(1)基本概念
+   java.io.FileInputStream类用于将图像之类的原始字节流从文件中读出来。
+
+(2)常用的方法
+   FileInputStream(String name) - 用于根据参数指定的文件来构造对象。
+   int read() - 用于从文件输入流中读取一个字节的数据并返回。
+       - 返回读取到的单个字节，若读到文件末尾则返回-1。
+   int read(byte[] b, int off, int len) 
+       - 用于从文件输入流中读取读取len个字节放入到数组b中下标为off的位置。
+       - 返回实际读取到的字节数，若读到文件末尾则返回-1。
+   int read(byte[] b) 
+       - 用于从文件输入流中读取b.length个字节放入数组b中。
+   void close() - 关闭文件输入流并释放有关的资源。
+   int available() - 用于获取文件的大小/字节数。
+  
+1.6 DataOutputStream类(熟悉)
+(1)基本概念
+   java.io.DataOutputStream类用于将java基本数据类型的数据写入到输出流中。
+
+(2)常用的方法 
+   DataOutputStream(OutputStream out) - 根据参数指定的引用来构造对象。
+       - 其中参数为抽象类，实参需要传递子类的对象。 
+   void writeInt(int v) - 用于将参数指定的整数写入输出流中。
+   void close()
+
+1.7 DataInputStream类(熟悉)
+(1)基本概念
+   java.io.DataInputStream类用于按照java基本数据类型来读取输入流中内容。   
+
+(2)常用的方法          
+   DataInputStream(InputStream in) - 根据参数指定的引用来构造对象。
+       - 其中参数为抽象类，实参需要传递子类对象。
+   int readInt() - 用于读取一个整数并返回。
+   void close()
+
+1.8 BufferedReader类(重点)
+(1)基本概念
+   java.io.BufferedReader类用于读取单个字符、字符数组以及一行字符串。  
+
+(2)常用的方法            
+   BufferedReader(Reader in) - 根据参数指定的引用来构造对象。
+       - 其中参数为抽象类，实参需要传递子类对象。
+   String readLine() - 用于读取一行字符串内容并返回。
+   void close()
+
+1.9 PrintStream类(重点)
+(1)基本概念
+   java.io.PrintStream类用于打印各种形式的数据内容。
+
+(2)常用的方法 
+   PrintStream(OutputStream out) - 根据参数指定的引用构造对象。
+       - 其中参数为抽象类，实参需要传递子类对象。
+   void println(String x) - 用于打印参数指定的字符串并换行。
+   void close()
+   
+练习：
+   要求使用BufferedReader和PrintStream类来模拟聊天记录的生成过程。 
+   不断地提示用户输入要发送的内容，将用户的名称和发送的内容整体写入文件c:/a.txt，
+直到用户输入"bye"时结束聊天。
+ 
+作业：
+   1.画出所学的类之间的框架图并掌握。
+   2.继续编写学生信息管理系统。  
+ 
+
+
+
+
+
+
+
+
+
+
+
+

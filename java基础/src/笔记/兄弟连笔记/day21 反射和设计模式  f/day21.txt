@@ -1,0 +1,162 @@
+1.编程题
+  使用tcp协议的编程模型，实现客户端向服务器发送"hello"，服务器接收打印之后向客户端回发消息"I received!"，客户端接收打印。
+
+作业：
+----------------------------------------------------------------------------------
+今天内容：
+   (1)反射机制
+   (2)常用的设计原则
+   (3)常用的设计模式
+
+1.反射机制(难点、尽量理解)
+1.1 基本概念
+如：
+   Person p = new Person();   - 创建Person类型的对象
+   Student s = new Student(); - 创建Student类型的对象
+   s.show();                  - 调用show()方法   
+
+   反射机制本质上就是一种用于实现动态编程的机制，可以在运行阶段动态地创建对象，以及动态地调用方法，具体功能由实参决定。
+   目前主流的框架SSH等地底层是采用反射机制实现的。
+
+1.2 Class类
+(1)基本概念
+   java.lang.Class类的实例可以描述java中的基本数据类型和引用数据类型等。
+   该类没有公共的构造方法，是由java虚拟机和类加载器自动构造实例。
+
+(2)Class对象的获取方式
+   a.使用数据类型.class的方式可以获取该类型的Class对象(掌握)。
+   b.使用对象.getClass()的方法可以获取该类型的Class对象。
+   c.使用包装类.TYPE的方式来获取对应基本数据类型的Class对象。
+   d.使用Class.forName()的方法可以获取参数类型的Class对象(掌握)。
+
+(3)常用的方法      
+   static Class<?> forName(String className) - 获取参数指定类名的Class对象并返回。
+   T newInstance() - 用于获取该Class对象表示的类的一个新实例。
+
+   Constructor<T> getConstructor(Class<?>... parameterTypes) 
+      - 用于根据参数指定的类型来获取该Class对象表示类中的一个公共构造方法并返回。
+   Constructor<?>[] getConstructors() 
+      - 用于获取该Class对象表示类中的所有公共构造方法。 
+ 
+   Field getDeclaredField(String name) 
+      - 用于获取该Class对象表示类中名字为name的成员变量并返回。
+   Field[] getDeclaredFields() 
+      - 用于获取该Class对象表示类中所有的成员变量并返回。
+   
+   Method getMethod(String name, Class<?>... parameterTypes) 
+      - 用于获取该Class对象表示类中名字为name，参数为parameterTypes的公共成员方法
+        并返回
+   Method[] getMethods() 
+       - 用于获取该Class对象表示类中所有的公共成员方法并返回。
+
+1.3 Constructor类
+   java.lang.reflect.Constructor类是用于描述Class对象对应类中的单个构造方法。
+   T newInstance(Object... initargs) - 使用当前调用对象表示的构造方法来构造Class对象表示类的新实例，调用构造方法的实参由该方法的形参传入。
+
+1.4 Field类 
+   java.lang.reflect.Field类是用于描述Class对象对应类中的单个成员变量。
+   Object get(Object obj) - 用于获取对象obj中当前调用对象表示成员变量的数值并返回。
+   String getName() - 用于获取当前调用对象表示成员变量的名称并返回。
+   void set(Object obj, Object value) - 用于将对象obj中的当前成员变量值改为value。
+   void setAccessible(boolean flag) - 用于设置是否进行java语言访问检查
+
+1.5 Method类
+   java.lang.reflect.Method类是用于描述Class对象对应类中的单个成员方法。
+   Object invoke(Object obj, Object... args) 
+      - 用于使用对象obj调用当前调用对象描述的方法，实参传递args。
+ 
+1.6 JavaBean的概念
+   JavaBean本质上就是一种习惯性编程规范，并不是明确的编程规则/语法格式，具体如下：
+       a.要求满足JavaBean规范的类必须在一个包中。
+       b.要求满足JavaBean规范的类必须提供无参的构造方法。
+       c.要求满足JavaBean规范的类中成员变量都是私有的。
+       d.要求满足JavaBean规范的类中提供公有的get成员变量和set成员变量的方法。
+       e.要求满足JavaBean规范的类需要支持序列化操作。
+
+2.常用的设计原则(熟悉、记住)
+2.1 软件/项目的开发流程
+   需求分析文档、概要设计文档、详细设计文档、编码和测试、安装和调试、维护和升级。 
+
+2.2 常用的设计原则
+   开闭原则（OCP） - 对扩展开放、对修改关闭。
+                   - 到目前为止，任何软件都是有Bug(臭虫、漏洞).
+                   - 为了软件的扩展性更好，易于维护和升级。
+如：
+   public class Person{
+      String name; 
+      int age; 
+      ... ...
+   }  
+   public class Student extends Person{                    
+      int id;
+   }
+
+   里氏代换原则（LSP）- 任何父类可以出现的地方，子类一定可以出现。
+                      - 子类 is a 父类
+                      - 使用继承和多态的机制。
+如：
+   public class TestShape{
+        public static void draw(Shape s){
+            s.show();
+        }
+   }
+
+   TestShape.draw(new Circle(1,2,3));
+
+   依赖倒转原则（DIP） - 尽量依赖于抽象类/接口，而不是具体的实现类。
+                       - 对子类具有强制性和规范性。
+如：
+   abstract class A{ 
+       public abstract void show();
+   }
+   class B extends A{}
+
+   接口隔离原则（ISP） - 尽量依赖于小接口而不是大接口，避免接口的污染。
+如：
+   interface FlyAnimal{
+        public abstract void fly(); - 用于描述飞行的行为
+  }
+  interface RunAnimal{
+	public abstract void run(); - 用于描述奔跑的行为
+  }
+  public class Dog implements RunAnimal{
+       public void run(){ ... ...}
+  }
+  public class Bird implements FlyAnimal{
+       public void fly(){ ... ...}
+  }
+
+  迪米特法则（最少知道原则）（DP） - 一个实体应当尽量少与其他实体之间产生联系/关联
+       - 高内聚、低耦合。
+       - 内聚就是指一个实体应该将该实体的所有功能聚集在实体的内部。
+       - 耦合就是指一个实体与其他实体之间的关联度/依赖程度。
+
+  合成复用原则（CRP）- 应当尽量使用合成的方式，而不是继承的方式。
+如：
+  class A{
+     void show(){  ...} 
+  }
+  class B{
+     private A a;
+
+     void test(){
+         a.show();
+     }
+  }
+
+3.常用的设计模式
+3.1 基本概念
+   设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结
+   设计模式就是固定的套路，用于固定的场合。
+
+3.2 基本分类
+   创建型模式:工厂方法模式、抽象工厂模式、单例设计模式、... ...(要求会写)
+   结构型模式:装饰器模式、代理模式、....(要求看懂)
+   行为型模式:模板设计模式、观察者模式、...(以后再看)
+
+
+
+
+
+
+

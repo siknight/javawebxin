@@ -1,0 +1,138 @@
+1.编程题
+  自定义Student类，属性有：学号和姓名，要求实现该类的封装以及equals()、hashCode()、toString()方法的重写。
+
+作业：
+--------------------------------------------------------------------------------
+今天内容：
+   (1)包装类和数学处理类
+   (2)String类
+   (3)StringBuilder类和StringBuffer类
+   (4)日期相关的类
+   (5)集合类
+
+1.包装类和数学处理类
+1.1 包装类的由来
+   java语言是一门纯面向对象的编程语言，万物皆对象。
+如：
+   int num = 10;             -  num是个变量，代表内存空间。
+   Person p = new Person();  -  p是个引用变量，代表对象。
+   
+   在某些特殊场合(集合)中，要求存放的所有数据内容都是必须是对象，而对于基本数据类型的数据来说不满足该要求，此时就需要将基本数据类型的内容进行对象化处理，而这个操作需要借助包装类。
+
+1.2 常用的包装类
+   java.lang.Integer类(重点)  - 是int类型的包装类。
+   java.lang.Double类         - 是double类型的包装类。
+   java.lang.Float类          - 是float类型的包装类
+   java.lang.Byte类           - 是byte类型的包装类。
+   java.lang.Short类          - 是short类型的包装类。
+   java.lang.Long类           - 是long类型的包装类。
+   java.lang.Boolean类        - 是boolean类型的包装类。
+   java.lang.Charater类       - 是char类型的包装类。
+
+1.3 Integer类(重点)
+(1)基本概念
+   java.lang.Integer类由关键字final修饰，表示该类不能被继承。
+   该类的内部包装了一个int类型的数据内容。
+   
+(2)常用的方法
+   Integer(int value) - 使用参数指定的整数值来构造对象。
+   Integer(String s)  - 使用参数指定的字符串内容来构造对象。
+   该类重写了equals()、hashCode()以及toString()方法。
+   int intValue() - 用于以int类型的方式返回该对象的数值。
+   static int parseInt(String s) - 用于将参数指定的字符串转换为int类型的整数。
+   static String toBinaryString(int i) - 用于将参数指定的整数转换为字符串形式二进制
+   static String toHexString(int i) - 用于将参数指定的整数转换为字符串形式十六进制
+   static Integer valueOf(String s) - 用于将参数指定字符串转换为Integer类型对象。
+
+要求记住的异常有：
+   算数异常、数组下标越界异常、空指针异常、类型转换异常、数字格式异常。
+
+1.4 装箱和拆箱的概念
+   装箱就是指从int类型向Integer类型的转换过程。
+   拆箱就是指从Integer类型向int类型的转换过程。
+   从jdk1.5开始支持自动装箱和自动解箱的技术实现。
+
+1.5 自动装箱池(尽量理解)
+   在Integer类的内部提供了一个自动装箱池，已经将-128到127之间整数装箱完毕，当程序执行过程中需要使用该范围整数时不需要构造对象直接去池中获取，否则需要构造新的对象。
+
+1.6 BigDecimal类(了解)
+(1)基本概念
+   虽然在java语言中使用float类型和double类型可以描述浮点数据，但这两种类型都不能实现精确计算，为了达到精确计算需要借助java.math.BigDecimal类。
+   
+(2)常用的方法
+   BigDecimal(String val) - 根据参数指定的字符串内容来构造对象。
+   BigDecimal add(BigDecimal augend) - 用于实现调用对象和参数对象之间的和并返回。
+   BigDecimal subtract(BigDecimal subtrahend) - 实现调用对象和参数对象之间差并返回
+   BigDecimal multiply(BigDecimal multiplicand)-实现调用对象和参数对象之间积并返回
+   BigDecimal divide(BigDecimal divisor) - 实现调用对象和参数对象之间商并返回。
+  
+1.7 BigInteger类(了解)
+(1)基本概念
+   在java中描述整数推荐使用int类型，若int类型范围不足则使用long类型，若long类型的范围还是不够则使用java.math.BigInteger类型。
+
+(2)常用的方法 
+   方法参数上述类即可。 
+ 
+2.String类(重中之重)
+2.1 基本概念
+  java.lang.String类由final关键字修饰，表示该类不能被继承。
+  该类用于描述字符串，可以描述java应用程序中所有的字符串字面值，而且是个常量，不可更改。如：
+   String     name   = "zhangfei";
+     |          |           |
+引用数据类型  引用名    字符串字面值(初始值) 
+   name = "xiaomage"; - 并不是改变字符串内容"zhangfei"，而是在改变name的指向。
+
+注意：
+   String str = null;  - 没有明确的字符串对象。
+   String str = "";    - 有字符串对象，只是里面没有内容而已。
+
+2.2 字符串常量池(尽量理解)
+   出于性能的考虑，java虚拟机会将出现的字符串字面值放入字符串常量池中，若下次出现重复的字符串则直接去池中获取，否则创建新的对象。
+
+2.3 常用的方法(练熟，记住)
+(1)常用的构造方法
+   String() - 使用无参的方式来构造对象.
+   String(byte[] bytes) - 使用参数指定的byte数组来构造对象。
+   String(byte[] bytes, int offset, int length)   
+      - 使用参数指定byte数组中从offset位置起的length个字节来构造对象。
+   String(String original) - 使用参数指定的字符串内容来构造对象(重点)。
+   String(StringBuffer buffer) - 使用参数指定的引用来构造对象。
+   String(StringBuilder builder) - 使用参数指定的引用来构造对象。
+
+(2)常用的普通方法
+   char charAt(int index) - 用于获取参数指定下标对应的单个字符并返回。
+        - 下标从0开始，一直到长度-1。
+   int length() - 用于获取字符串的长度，切记不要与数组名.length混淆。
+   
+   int compareTo(String anotherString) - 比较调用对象和参数对象的大小。
+      - 若调用字符串大于参数字符串则返回正数。
+      - 若调用字符串等于参数字符串则返回0.
+      - 若调用字符串小于参数字符串则返回负数。
+      - 从第一个字符起依次比较ASCII的大小，若第一个字符能区分大小则后续字符不用比较
+        若第一个字符不能区分大小，则使用第二个字符比较，直到对应位置的字符能比较出
+        大小关系为止，或者一个字符串的所有字符比较完毕了，则更长的字符串比较大。
+   int compareToIgnoreCase(String str) 
+      - 比较两个字符串的大小不考虑大小写，最终将每个字符转换为小写形式比较。
+   boolean equals(Object anObject) - 判断调用字符串和参数字符串是否相等。
+   boolean equalsIgnoreCase(String anotherString) 
+      - 判断调用字符串和参数字符串是否相等，不考虑大小写问题。
+     
+作业：
+   1.查询PPT中介绍的String类方法并尝试使用。
+   2.编程题
+     提示用户不断地输入要发送的内容并进行判断，若是"bye"则退出循环，否则就判断用户输入的内容与"bye"之间的大小关系并打印。 
+ 
+
+   
+
+
+
+
+
+
+
+
+
+
+
+

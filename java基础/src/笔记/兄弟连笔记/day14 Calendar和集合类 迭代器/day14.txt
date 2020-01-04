@@ -1,0 +1,144 @@
+1.编程题
+  提示用户输入一个字符串内容并接收，查找该字符串中所有"Day"出现的位置并打印出来。
+
+2.简答题
+  写出正则表达式中表达数量的常用规则。
+
+作业：
+----------------------------------------------------------------------------------
+今天内容：
+   (1)日期相关的类
+   (2)集合类
+   (3)List集合
+   (4)Queue集合
+   (5)Set集合
+   (6)Map集合
+
+1.日期相关的类(查手册会用即可)
+1.1 Date类
+  java.util.Date类用于描述日期和时间信息的。
+
+1.2 Calendar类
+(1)基本概念
+   java.util.Calendar类用于日期和时间信息的，该类的一些方法取代了Date类中过时的方法
+
+(2)常用的方法
+   static Calendar getInstance() - 用于获取Calendar类型的引用/对象，使用类名.调用
+   void set(int year, int month, int date, int hourOfDay, int minute, int second) 
+      - 通过该方法可以设置年月日时分秒。
+   Date getTime() - 用于根据当前调用对象得到Date类型的对象。
+
+2.集合类(重点)
+2.1 基本概念
+  数组 - 本质上就是一段连续的内存空间，用于存放多个相同类型的数据。
+       - 通过下标访问数组中的元素非常方便。
+       - 数组一旦声明则内存空间大小固定，无法更改。 
+       - 插入和删除元素时不方便，可能移动大量的元素。
+       - 数组中的元素可以是基本类型，也可以是引用类型。
+  
+  集合 - 内存空间可以连续也可以不连续，可以存放多个类型不同的数据。
+       - 集合中部分支持下标访问，部分不支持。
+       - 集合声明之后内存空间大小不固定，可以随时动态调整。
+       - 集合中插入和删除元素方便。
+       - 集合中的元素必须是引用类型，可以借助包装类。
+
+  数组和集合本质上都是一种容器，而集合类就是指描述集合的相关类和接口等。
+
+2.2 基本分类
+   集合框架主要分为两大类：java.util.Collection集合  和  java.util.Map集合。
+   其中Collection集合中主要存放元素的单元为：单个元素。
+   其中Map集合中主要存放元素的单元为：单对元素。
+
+   Collection集合以后很少直接使用，更多的使用该集合的子接口：List集合、Queue集合、以及Set集合。  
+
+2.3 Collection集合的常用方法(练熟、记住)
+   boolean add(E e) - 用于将参数指定的元素添加到当前集合中。
+       - 若元素添加成功则返回true，否则返回false。
+   boolean addAll(Collection<? extends E> c) 
+       - 用于将参数指定集合中的所有元素一个一个添加到当前集合中。
+   
+   boolean remove(Object o) - 用于将参数指定的单个元素从当前集合中移除。
+   boolean removeAll(Collection<?> c) - 用于将参数指定集合中的所有元素移除。
+   void clear() - 用于清空当前集合中的所有元素。
+
+   boolean contains(Object o) - 用于判断参数指定的元素是否存在于当前集合。
+   boolean containsAll(Collection<?> c) - 判断当前集合是否包含参数集合中的所有元素
+   
+   boolean isEmpty() - 判断当前集合是否为空。
+   int size() - 获取当前集合中元素的个数。
+
+   boolean retainAll(Collection<?> c) 
+      - 用于计算当前集合和参数集合的交集并保留到当前集合中。
+      - 当前集合若发生更改则返回true，否则返回false。
+   Iterator<E> iterator() - 用于返回当前集合的迭代器。
+
+3.List集合(重点)
+3.1 基本概念
+   java.util.List接口是Collection接口的子接口，该接口的元素有放入次序，允许重复。
+   该接口的主要实现类有：ArrayList类、LinkedList类、Stack类、Vector类(笔试)。
+   其中ArrayList类的底层是采用动态数组实现的，增删元素不方便，访问元素方便。
+   其中LinkedList类的底层是采用链表实现的，增删元素方便，访问元素不方便。
+   其中Stack类(栈)的底层是采用动态数组实现的，该类是一种具有后进先出特性的数据结构，简称为LIFO(last in first out)。
+   其中Vector类的底层是采用动态数组实现的，与ArrayList类相比，是属于线程安全的类，因此效率比较低，推荐使用ArrayList类。
+
+3.2 常用的方法
+   void add(int index, E element) - 用于将element插入到index指定的位置上。
+   boolean addAll(int index, Collection<? extends E> c) 
+      - 用于将参数集合c中的所有元素插入到index指向的位置。
+   
+   E remove(int index) - 用于删除参数index指向的元素，返回删除的元素值。 
+   E set(int index, E element) - 用于将index指向的元素替换为element，并返回之前元素
+   E get(int index) - 用于返回index指向的元素。
+   List<E> subList(int fromIndex, int toIndex) - 用于返回集合中的一部分内容。
+
+3.3 泛型机制
+   目前集合中虽然可以存放不同类型的数据，但集合中都是看做Object类型的数据去存放的，
+当需要从集合中取出数据并表达该数据原始类型时，可能需要进行强制类型转换，此时可能引发类型转换异常，为了避免该错误的发生，从jdk1.5开始支持泛型机制。
+   泛型机制就是指在集合名称的右边使用<数据类型>的方式明确要求该集合中可以存放的元素类型，若存放不同类型的元素时则编译报错。
+如：
+   List<String> l1 = new LinkedList<String>();   
+   
+   泛型的本质就是参数化类型，也就是将数据类型作为实参传给形参E，在类体中的所有E就变成了实参的数据类型。 
+
+4.Queue集合(重点)
+4.1 基本概念
+  java.util.Queue接口是Collection接口的子接口，和List接口是平级的关系。
+  队列是一种具有先进先出特性的数据结构，简称为FIFO(first in first out)。
+  该接口的主要实现类：LinkedList类，该类在增删方面都有一定的优势。
+
+4.2 常用的方法
+   boolean offer(E e) - 用于将参数指定的元素放入当前集合，成功返回true，否则false。
+   E poll() - 用于获取并移除该集合中的队首元素，若队列为空则返回null。
+   E peek() - 用于获取集合中的队首元素并返回，若队列为空则返回null。
+
+作业：
+   1.复习和练习Collection接口和List接口的常用方法。
+   2.使用List接口实现简易的学生信息管理系统，要求打印字符界面提示用户选择相应的功能，根据用户的输入去实现增加、删除、修改、查找以及遍历所有学生信息的功能。
+   其中学生的信息有：学号、姓名、年龄。
+   提示：
+      尽量拆分为多个.java文件      
+         
+  
+   
+ 
+ 
+  
+  
+  
+  
+ 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+

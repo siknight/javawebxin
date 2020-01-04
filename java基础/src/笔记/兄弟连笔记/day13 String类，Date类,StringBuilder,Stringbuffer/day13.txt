@@ -1,0 +1,154 @@
+1.简答题
+  写出String类中常用的5个方法，只需要写出方法名和功能即可。
+
+2.编程题
+  分别使用两种方式将字符串内容"12345"转换为十进制整数并打印出来。
+
+作业：
+---------------------------------------------------------------------------------
+今天内容：
+   (1)String类
+   (2)StringBuffer类和StringBuilder类
+   (3)日期相关的类
+   (4)集合类
+
+1.String类(重中之重)
+1.1 常用的方法(练熟、记住)
+   boolean contains(CharSequence s) - 用于判断当前字符串中是否包含参数指定的内容。
+       - 其中参数是接口类型的引用，实参可以传递实现类的对象，从而形成多态。
+   boolean endsWith(String suffix) - 判断当前字符串是否以suffix为结尾/后缀。
+   boolean startsWith(String prefix) - 判断当前字符串是否以prefix为开头。
+   String toLowerCase() - 用于将所有字符转换为小写并返回。
+   String toUpperCase() - 用于将所有字符转换为大写并返回。
+   String trim() - 用于忽略两端的空白字符并返回。 
+  
+   byte[] getBytes() - 用于将当前字符串内容转换为byte数组并返回。
+   
+   int indexOf(int ch) - 用于返回参数指定字符在当前字符串中的索引位置并返回。
+       - 返回第一次出现的下标，若没有出现则返回-1。
+   int indexOf(int ch, int fromIndex) - 用于从fromIndex位置开始查找字符ch。
+   int indexOf(String str) - 用于查找str在当前字符串中第一个出现的索引位置。
+   int indexOf(String str, int fromIndex) - 用于从fromIndex位置开始查找str。
+ 
+   int lastIndexOf(int ch) - 查找参数指定字符最后一次出现的索引位置。
+       - 也就是反向查找中第一次出现的索引位置。
+   int lastIndexOf(int ch, int fromIndex) 
+       - 用于从指定的位置开始反向查找第一次出现的索引位置。
+   int lastIndexOf(String str) - 用于反向查找字符串。
+   int lastIndexOf(String str, int fromIndex) - 用于从指定位置开始反向查找字符串。
+
+   String substring(int beginIndex) - 用于获取从beginIndex位置开始到结尾的子字符串
+   String substring(int beginIndex, int endIndex) 
+      - 用于获取从beginIndex位置开始到endIndex(不包含)位置结尾的子字符串。
+   
+   boolean matches(String regex) 
+      - 用于判断当前字符串是否满足参数字符串指定的正则表达式规则。
+   String replaceAll(String regex, String replacement) 
+      - 用于根据正则表达式的规则进行所有字符串的替换。
+   String[] split(String regex) 
+      - 用于根据正则表达式的规则进行字符串的拆分。
+
+1.2 正则表达式
+(1)基本概念
+   正则表达式本质上就是一个字符串，用于进行格式的验证、匹配、查找、替换等。
+   为了与普通字符串进行区分，该字符串通常使用"^"开头，使用"$"结尾，可以省略。
+  
+(2)常用的规则(练熟、记住)
+   [abc] - 表示可以出现a、b以及c
+   [^abc] - 表示可以出现任何字符，除了a、b以及c。
+   [a-zA-Z] - 表示可以出现任何字母，也就是a到z和A到Z之间的任意字符。
+   
+   \d - 表示可以出现任何数字，相当于[0-9]。
+   \D - 表示可以出现任何非数字，相当于[^0-9]。        
+   \s - 表示可以出现任何空白字符，相当于[ \t\n\x0B\f\r]。
+   \S - 表示可以出现任何非空白字符，相当于[^\s]。     
+   \w - 表示可以出现任何单词字符，相当于[a-zA-Z_0-9]，就是字母数字下划线组成。 	
+   \W - 表示可以出现任何非单词字符，相当于[^\w]。
+   
+    
+   X? - 表示X可以出现一次或一次也没有，也就是可以出现0 ~ 1次。
+   X* - 表示X可以出现零次或多次，也就是可以出现0 ~ n次。
+   X+ - 表示X可以出现一次或多次，也就是可以出现1 ~ n次。
+   X{n} - 表示X可以出现恰好 n 次。
+   X{n,} - 表示X可以出现至少 n 次，也就是>=n次。
+   X{n,m} - 表示X可以出现至少 n 次，但是不超过 m 次，也就是>=n次并且<=m次。      
+
+2.StringBuilder类和StringBuffer类(查手册会用即可)
+2.1 基本概念
+   由于String类描述的字符串是个常量不可更改，若程序中出现大量差别不大的字符串内容时，若每个字符串单独保存一份对内存的消耗比较大，为了节省内存空间可以使用StringBuilder类和StringBuffer类描述字符串，这两个类描述的字符序列是可以改变的。
+   StringBuilder类是后期增加的类，不支持线程同步，效率比较高。
+   StringBuffer类是早期提供类，支持线程同步，效率比较低，因此推荐使用StringBuilder 
+
+2.2 常用的方法
+   StringBuilder() - 采用无参的形式构造对象，初始容量是16个字符。
+   StringBuilder(String str) - 采用字符串参数内容来构造对象，初始容量:16+字符串长度
+   int capacity() - 用于获取当前字符串对象的容量。
+   int length() - 用于获取当前字符串中字符的个数。
+   该类重写了toString()方法，但没有重写equals()以及hashCode()方法。
+ 
+   StringBuilder append(String str) - 用于将参数指定内容追加到当前字符串末尾并返回
+   StringBuilder insert(int offset, String str) 
+      - 用于将参数str指向的字符串内容插入到当前字符串中下标为offset的索引位置。
+   StringBuilder delete(int start, int end) - 用于删除字符串中指定的内容。 
+   StringBuilder replace(int start, int end, String str) 
+      - 用于将当前字符串中从start位置开始一直end位置结尾的所有字符内容替换为str。
+   StringBuilder reverse() - 用于实现字符串内容的反转。
+
+3.日期相关的类(查手册会用即可)
+3.1 Date类
+(1)基本概念
+   java.util.Date类用于描述日期和时间的信息，可以精确到毫秒。
+
+(2)常用的方法    
+   Date() - 使用无参的方式来构造对象，默认使用当前系统时间来初始化。
+   Date(long date) - 使用参数指定的毫秒数来构造对象。
+      - 毫秒数指从1970年1月1日0时0分0秒距离指定日期的间距。
+      - 1秒等于1000毫秒(与后面File类中的方法配合使用)
+   long getTime() - 用于返回当前对象距离1970年1月1日0时0分0秒之间的毫秒数。
+   void setTime(long time) - 用于使用参数指定的毫秒数去设置日期对象。
+
+3.2 SimpleDateFormat类
+(1)基本概念
+   java.text.SimpleDateFormat类是用于调整日期格式信息的。
+
+(2)常用的方法
+   SimpleDateFormat(String pattern) - 根据参数指定的格式来构造对象。
+      - 格式字符串内容有： y 代表年  M代表月 d代表日 H代表时 m代表分 s代表秒
+   String format(Date date) - 用于将参数指定的引用转换为字符串并返回。
+   Date parse(String source) - 用于将参数指定的字符串转换为日期对象并返回。
+
+作业：
+   1.首先输入学生人数，循环输入班级的学生信息，然后放入Student数组中，并打印所有
+     姓zhang的学生信息。
+     要求姓名用拼音(不要用汉字),学生所有信息用String格式输入，中间用逗号隔开。
+     其中学生信息有：学号、姓名以及年龄。  
+ 
+提示：
+    需要查询String类中的split()方法进行字符串拆分，实参传递逗号(",")即可。  
+
+ 
+
+
+ 
+ 
+
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
