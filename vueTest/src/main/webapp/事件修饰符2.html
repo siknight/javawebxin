@@ -10,21 +10,21 @@
 
 	<body>
 		<div id="app">
-			<form action="demo1.html" @submit.prevent>
+			<form action="快速入门示例.html" @submit.prevent>
 				<input type="submit" value="提交" >
 			</form>
 
-			<form action="demo1.html" @submit.stop>
+			<form action="快速入门示例.html" @submit.stop>
 				<input type="submit" value="提交2" >
 			</form>
 			<div @click="fun01">
 				<!--//先执行fun01方法，在执行demo01.html跳转-->
-				<a href="demo1.html">qudemo02</a>
+				<a href="快速入门示例.html">qudemo02</a>
 				<!--只会执行跳转，不会执行fun01方法-->
-				<a @click.stop href="demo1.html">qudemo01</a>
+				<a @click.stop href="快速入门示例.html">qudemo01</a>
 			</div>
 			<!--下面这个标签不会执行-->
-			<a @click.prevent stop href="demo1.html">qudemo03</a>
+			<a @click.prevent stop href="快速入门示例.html">qudemo03</a>
 		</div>
 	</body>
 	<script>
