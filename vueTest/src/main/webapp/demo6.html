@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>v-on:按键修饰符</title>
+
+		<script src="js/vuejs-2.5.16.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+		   <div v-html="msg01"></div>
+		   <div v-text="msg02"></div>
+		</div>
+	</body>
+	<script>
+		//view model
+		new Vue({
+			el:"#app",
+			data:{
+				msg01:"<h1>heheh</h1>",
+				msg02:"<h1>heheh</h1>"
+			}
+		});
+	</script>
+
+</html>

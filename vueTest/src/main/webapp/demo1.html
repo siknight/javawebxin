@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>快速入门</title>
+		<script src="js/vuejs-2.5.16.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--Vue的插值表达式，把data中定义的数据显示到此处-->
+			{{message}}
+			{{number}}
+		</div>
+	</body>
+	<script>
+		//view model
+		//创建Vue对象
+		new Vue({
+			el:"#app", //由vue接管id为app区域
+			data:{
+			    message:"hello vue", //注意此处不要加分号
+				number:100
+			}
+		});
+		
+	</script>
+</html>

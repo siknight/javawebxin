@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>v-if与v-show</title>
+		<script src="js/vuejs-2.5.16.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div v-if="flag">hello xiang </div>
+			<div v-show="flag">hello jiang</div>
+			<button v-on:click="fun01">改变</button>
+		</div>
+	</body>
+	<script>
+		//view model
+		new Vue({
+			el:"#app",
+			data:{
+				flag:true
+			},
+			methods:{
+				fun01:function(){
+					this.flag=!this.flag;
+				}
+			}
+		});
+	</script>
+</html>

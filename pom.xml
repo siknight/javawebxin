@@ -10,6 +10,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>java基础</module>
+
+        <module>vueTest</module>
     </modules>
 
 

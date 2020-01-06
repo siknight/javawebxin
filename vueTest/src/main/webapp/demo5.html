@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>v-on:事件修饰符</title>
+
+		<script src="js/vuejs-2.5.16.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<form action="demo1.html" @submit.prevent>
+				<input type="submit" value="提交" >
+			</form>
+
+			<form action="demo1.html" @submit.stop>
+				<input type="submit" value="提交2" >
+			</form>
+			<div @click="fun01">
+				<!--//先执行fun01方法，在执行demo01.html跳转-->
+				<a href="demo1.html">qudemo02</a>
+				<!--只会执行跳转，不会执行fun01方法-->
+				<a @click.stop href="demo1.html">qudemo01</a>
+			</div>
+			<!--下面这个标签不会执行-->
+			<a @click.prevent stop href="demo1.html">qudemo03</a>
+		</div>
+	</body>
+	<script>
+	/**
+	 * @click.stop 只会执行当前标签时间
+	 * @submit.prevent 阻止当前标签执行
+	 */
+		new Vue({
+			el:"#app",
+			methods:{
+				fun01:function(){
+					alert("nihao")
+				}
+			}
+		});
+		
+		
+	</script>
+
+</html>
