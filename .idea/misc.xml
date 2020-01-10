@@ -14,6 +14,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/vue/pom.xml" />
+        <option value="$PROJECT_DIR$/黑马大前端vue学习/pom.xml" />
       </set>
     </option>
   </component>

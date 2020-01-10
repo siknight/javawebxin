@@ -8,11 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="java基础" />
         <module name="springboot-vue" />
-        <module name="vueTest" />
+        <module name="vueJavaWeb和大前端代码" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="vue" target="1.5" />
+      <module name="黑马大前端vue学习" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
