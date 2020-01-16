@@ -20,4 +20,12 @@ public class StrTest {
 
     }
 
+    @Test
+    public  void test02(){
+        String str="abcde";
+        System.out.println(str.substring(0));
+        System.out.println(str.substring(1));
+
+    }
+
 }
